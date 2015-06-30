@@ -1,0 +1,93 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+h2 {
+  text-align: center;
+  width: 40%;
+  margin: auto;
+  color: #68c4af;
+  font-weight: bold;
+  font-size: 35px;
+}
+th {
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: solid;
+  border-width: thin;
+}
+
+table {
+  width: 60%;
+  margin: auto;
+  margin-top: 20px;
+  align-content: center;
+  text-align: center;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+form {
+  text-align: center;
+}
+
+p {
+  text-align: center;
+}
+
+.bottom-bar {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.navbar-text {
+  margin-top: 20px;
+  border-radius: 7px;
+  padding: 10px;
+  text-align: right;
+  background-color: #f7e7b4
+}
+
+.btn {
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: rgb(202, 60, 60)
+}
+.btn:hover {
+  background: #fa0000;
+  text-decoration: none;
+}
+
+.errors {
+  margin: auto;
+}
+.input {
+  margin-top: 20px;
+}
+.alert {
+  margin: 10px 0px;
+  padding:12px;
+  border-radius: 10px;
+}
+.alert.alert-success {
+  color: #4F8A10;
+  background-color: #DFF2BF;
+}
+
+.alert.alert-danger {
+  color: #D8000C;
+  background-color: #FFBABA
+}

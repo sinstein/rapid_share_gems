@@ -1,0 +1,9 @@
+<h2>Upload new file</h2>
+
+<div class="Form">
+<%= form_for :attachment, url: user_attachments_path do |f| %>
+  <p><%= f.file_field :file, :required => true %>
+  <%= f.submit %></p>
+<% end %>
+
+<p><%= link_to 'View All Files', user_attachments_path, :class => 'bottom-bar'%></p>

@@ -1,0 +1,13 @@
+<h2>Attachment Uploaded</h2>
+<table align="center" cellpadding="10">
+  <tr>
+  <th>File Name :</th>
+  <td><%= @attachment.name %></td>
+  </tr>
+  <tr>
+  <th>Format :</th>
+  <td><%= @attachment.format %></td>
+  </tr>
+</table>
+
+<p><%= link_to 'View All Files', user_attachments_path, :class => 'bottom-bar' %></p>

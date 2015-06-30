@@ -1,0 +1,20 @@
+<h2> Listing Files </h2>
+<table>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th colspan="2">Operations</th>
+  </tr>
+  <% @attachments.each do |attachment| %>
+  <tr>
+    <td><%= attachment.name %></td>
+    <td><%= attachment.format %></td>
+    <td><%= link_to 'Download Link', :action => 'download' , :id => attachment.id  %></td>
+    <td><%= button_to 'Delete', user_attachment_path(params[:user_id], attachment),
+            method: :delete,
+            data: { confirm: 'Are you sure?' }, :class => 'btn' %></td>
+  </tr>
+  <% end %>
+ </table>
+
+<p><%= link_to 'New Upload', new_user_attachment_path, :class => 'bottom-bar' %></p>
