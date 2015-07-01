@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  # rescue_from Exception, :with => :record_not_found
+  rescue_from Exception, :with => :record_not_found
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
   rescue_from CarrierWave::IntegrityError, :with => :invalid_file
 
