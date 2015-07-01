@@ -1,10 +1,11 @@
 class AttachmentsController < ApplicationController
-  before_action :authenticate_user!, except: :download
+  before_action :route_user, except: :download
+
   def new
   end
 
   def index
-    @attachments = Attachment.where(:user_id => params[:user_id])
+    @attachments = Attachment.where(:user_id => current_user.id)
     if(@attachments.empty?)
       redirect_to new_user_attachment_path
     end
@@ -12,7 +13,7 @@ class AttachmentsController < ApplicationController
 
   def create
     uploader = LauncherUploader.new
-    @user = User.find(params[:user_id])
+    @user = User.find(current_user.id)
     @attachment = Attachment.new(params[:attachment => {:file => [ :original_filename ]}])
     @attachment.name = params[:attachment][:file].original_filename
     @attachment.format = params[:attachment][:file].content_type
@@ -28,7 +29,7 @@ class AttachmentsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:user_id])
+    @user = User.find(current_user.id)
     @attachment = user.attachments.find(@user.id)
   end
 
@@ -39,7 +40,7 @@ class AttachmentsController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:user_id]) or not_found
+    @user = User.find(current_user.id) or not_found
     @attachment = @user.attachments.find(params[:id])
     @attachment.destroy
     name = @attachment.name

@@ -15,6 +15,15 @@ class ApplicationController < ActionController::Base
     redirect_to new_user_attachment_path, alert: "File format not supported"
   end
 
+  def route_user
+    if !current_user.nil?
+      if !params.empty? && params.key?(:user_id) && current_user.id.to_s != params[:user_id]
+        redirect_to user_attachments_path(current_user.id)
+      end
+    else
+      redirect_to new_user_session_path, alert: "Access denied!"
+    end
+  end
 
   protect_from_forgery with: :exception
   def after_sign_in_path_for(user)
