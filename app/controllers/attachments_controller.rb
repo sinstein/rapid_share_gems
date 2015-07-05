@@ -2,6 +2,7 @@ class AttachmentsController < ApplicationController
   before_action :route_user, except: :download
 
   def new
+    @attachment = Attachment.new
   end
 
   def index
@@ -12,19 +13,15 @@ class AttachmentsController < ApplicationController
   end
 
   def create
-    uploader = LauncherUploader.new
-    @user = User.find(current_user.id)
-    @attachment = Attachment.new(params[:attachment => {:file => [ :original_filename ]}])
-    @attachment.name = params[:attachment][:file].original_filename
-    @attachment.format = params[:attachment][:file].content_type
-    @attachment.user_id = @user.id
-    @attachment.alias = Time.now.to_i.to_s + @attachment.name
-    #if !validate_file_size(params[:attachment][:file])
-    if !uploader.store!(params[:attachment][:file])
-      render "new"
-    else
-      @attachment.save
+    @attachment = Attachment.new
+    @attachment.launcher = params[:attachment][:file]
+    @attachment.user_id = current_user.id
+
+    if @attachment.save!
+      debugger
       redirect_to user_attachments_path, notice: "The file #{@attachment.name} was uploaded"
+    else
+      render "new"
     end
   end
 
@@ -36,7 +33,7 @@ class AttachmentsController < ApplicationController
   def download
     @user = User.find(params[:user_id])
     @attachment = @user.attachments.find(params[:id])
-    send_file "#{Rails.root}/public/data/#{@attachment.alias}"
+    send_file @attachment.launcher.url
   end
 
   def destroy

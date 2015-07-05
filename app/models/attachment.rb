@@ -1,11 +1,15 @@
 class Attachment < ActiveRecord::Base
   belongs_to :user
+  before_save :process_file
   mount_uploader :launcher, LauncherUploader
-  validate :file_format
 
 
-  def file_format
-    whitelist = ["pdf","png","jpg","jpeg","rb","txt","azw",""]
+  def process_file
+    self.alias = self.launcher.filename
+    self.name = Time.now.to_i.to_s + self.alias
+    self.format = self.launcher.content_type
+
+    whitelist = ["pdf","png","jpg","jpeg","rb","txt","azw"]
     if(self.name.nil?)
       errors.add(:file, " has no name")
     else
@@ -15,4 +19,5 @@ class Attachment < ActiveRecord::Base
       end
     end
   end
+
 end

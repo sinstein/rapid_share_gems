@@ -1,5 +1,13 @@
 <h2>Upload new file</h2>
 
+<div class="errors">
+  <% if !@attachment.errors.empty? %>
+    <% @attachment.errors.full_messages.each do |error_message| %>
+      <p><%= error_message %></p>
+    <% end %>
+  <% end %>
+</div>
+
 <div class="Form">
 <%= form_for :attachment, url: user_attachments_path do |f| %>
   <p><%= f.file_field :file, :required => true %>

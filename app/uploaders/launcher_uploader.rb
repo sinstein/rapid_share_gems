@@ -38,12 +38,5 @@ class LauncherUploader < CarrierWave::Uploader::Base
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  def extension_white_list
-   %w(jpg jpeg gif png pdf rb azw)
-  end
-
-  def filename
-    Time.now.to_i.to_s + original_filename if original_filename
-  end
-
+  
 end

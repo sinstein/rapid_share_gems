@@ -7,7 +7,7 @@
   </tr>
   <% @attachments.each do |attachment| %>
   <tr>
-    <td><%= attachment.name %></td>
+    <td><%= attachment.alias %></td>
     <td><%= attachment.format %></td>
     <td><%= link_to 'Download Link', :action => 'download' , :id => attachment.id  %></td>
     <td><%= button_to 'Delete', user_attachment_path(params[:user_id], attachment),
