@@ -2,12 +2,13 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   rescue_from Exception, :with => :record_not_found
-  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-  rescue_from CarrierWave::IntegrityError, :with => :invalid_file
+  rescue_from ActionController::RoutingError, :with => :record_not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from CarrierWave::IntegrityError, with: :invalid_file
 
   def record_not_found
     flash[:error] = "Oops! We cannot find what you are looking for!"
-    redirect_to user_attachments_path
+    redirect_to new_user_session_path
     return
   end
 
@@ -18,10 +19,8 @@ class ApplicationController < ActionController::Base
   def route_user
     if !current_user.nil?
       if !params.empty? && params.key?(:user_id) && current_user.id.to_s != params[:user_id]
-        redirect_to user_attachments_path(current_user.id)
+        redirect_to user_attachments_path(current_user.id), alert: "Unauthourized!!"
       end
-    else
-      redirect_to new_user_session_path, alert: "Access denied!"
     end
   end
 

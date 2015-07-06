@@ -1,15 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
-    get 'welcome/index'
-    root 'welcome#index'
 
-    resources :users do
-      resources :attachments do
-        get 'download', 
-        on: :member
-      end
+  root 'welcome#index'
+
+  resources :users do
+    resources :attachments do
+      get 'download',
+      on: :member
     end
-
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

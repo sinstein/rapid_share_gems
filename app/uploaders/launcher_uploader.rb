@@ -16,6 +16,10 @@ class LauncherUploader < CarrierWave::Uploader::Base
     "#{Rails.root}/public/data/"
   end
 
+  def filename
+      "#{Time.now.to_i.to_s + original_filename}" if original_filename
+  end
+
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
   #   # For Rails 3.1+ asset pipeline compatibility:
@@ -38,5 +42,5 @@ class LauncherUploader < CarrierWave::Uploader::Base
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  
+
 end
