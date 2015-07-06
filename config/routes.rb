@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  resources :users do
+  resources :users, except: [:show, :update, :create, :index, :new, :edit, :destroy] do
     resources :attachments do
       get 'download',
       on: :member
